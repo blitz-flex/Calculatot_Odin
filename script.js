@@ -37,3 +37,42 @@ function handleOperator(op) {
     }
   }
   
+
+  function calculate() {
+    if (firstNumber === null || operator === null) return;
+  
+    const secondNumber = display.textContent;
+    let result;
+  
+    try {
+      switch (operator) {
+        case '+': result = parseFloat(firstNumber) + parseFloat(secondNumber); break;
+        case '-': result = parseFloat(firstNumber) - parseFloat(secondNumber); break;
+        case '×': result = parseFloat(firstNumber) * parseFloat(secondNumber); break;
+        case '÷': 
+          if (parseFloat(secondNumber) === 0) throw "Cannot divide by zero";
+          result = parseFloat(firstNumber) / parseFloat(secondNumber); 
+          break;
+        case '^': result = Math.pow(parseFloat(firstNumber), parseFloat(secondNumber)); break;
+        case '%': result = parseFloat(firstNumber) * (parseFloat(secondNumber) / 100); break;
+      }
+  
+      result = formatResult(result);
+      display.textContent = result;
+      firstNumber = result;
+      resetDisplay = true;
+    } catch (error) {
+      display.textContent = "Error";
+      resetDisplay = true;
+      firstNumber = null;
+      operator = null;
+    }
+  }
+  
+  function formatResult(num) {
+    if (num === undefined) return "Error";
+    const numStr = num.toString();
+    if (numStr.length <= 10) return numStr;
+    return num.toExponential(5);
+  }
+  
