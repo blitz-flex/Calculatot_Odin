@@ -11,7 +11,17 @@ buttons.forEach(button => {
 
     if (button.classList.contains('digit')) {
       handleDigit(value);
-    }
+    } else if (button.classList.contains('operator')) {
+        handleOperator(value);
+      } else if (value === '=') {
+        calculate();
+      } else if (value === 'C') {
+        resetCalculator();
+      } else if (value === '.') {
+        addDecimal();
+      } else if (value === '⌫') {
+        backspace();
+      }
   });
 });
 
