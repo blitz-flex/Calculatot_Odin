@@ -25,6 +25,7 @@ buttons.forEach(button => {
   });
 });
 
+// Function to handle digit input
 function handleDigit(digit) {
   if (display.textContent === '0' || resetDisplay) {
     display.textContent = digit;
@@ -34,6 +35,7 @@ function handleDigit(digit) {
   }
 }
 
+// Function to handle operator clicks
 function handleOperator(op) {
     if (firstNumber === null) {
       firstNumber = display.textContent;
@@ -47,8 +49,8 @@ function handleOperator(op) {
     }
   }
   
-
-  function calculate() {
+// Function to perform calculation
+function calculate() {
     if (firstNumber === null || operator === null) return;
   
     const secondNumber = display.textContent;
@@ -66,7 +68,8 @@ function handleOperator(op) {
         case '^': result = Math.pow(parseFloat(firstNumber), parseFloat(secondNumber)); break;
         case '%': result = parseFloat(firstNumber) * (parseFloat(secondNumber) / 100); break;
       }
-  
+      
+      // Format result for display
       result = formatResult(result);
       display.textContent = result;
       firstNumber = result;
@@ -79,10 +82,26 @@ function handleOperator(op) {
     }
   }
   
-  function formatResult(num) {
+// Format result to fit display
+function formatResult(num) {
     if (num === undefined) return "Error";
+
+    // Convert to string and check length
     const numStr = num.toString();
     if (numStr.length <= 10) return numStr;
+    
     return num.toExponential(5);
+  }
+// Add decimal point
+function addDecimal() {
+    if (resetDisplay) {
+      display.textContent = '0.';
+      resetDisplay = false;
+      return;
+    }
+    
+    if (!display.textContent.includes('.')) {
+      display.textContent += '.';
+    }
   }
   
