@@ -124,4 +124,25 @@ function resetCalculator() {
     operator = null;
     resetDisplay = false;
   }
+
+// Add keyboard support
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    
+    // Match key to button and click it
+    if (/[0-9]/.test(key)) {
+      document.querySelector(`.digit:nth-child(${key === '0' ? 17 : parseInt(key) + 12 - (parseInt(key) > 3 ? 3 : 0) - (parseInt(key) > 6 ? 3 : 0)})`).click();
+    } else if (key === '+' || key === '-' || key === '*' || key === '/' || key === '%' || key === '^') {
+      const opMap = {'+': 'add', '-': 'subtract', '*': 'multiply', '/': 'divide', '%': 'percent', '^': 'power'};
+      document.getElementById(opMap[key]).click();
+    } else if (key === '.' || key === ',') {
+      document.getElementById('decimal').click();
+    } else if (key === '=' || key === 'Enter') {
+      document.getElementById('equals').click();
+    } else if (key === 'Escape') {
+      document.getElementById('clear').click();
+    } else if (key === 'Backspace') {
+      document.getElementById('backspace').click();
+    }
+  });
   
