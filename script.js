@@ -23,3 +23,17 @@ function handleDigit(digit) {
     display.textContent += digit;
   }
 }
+
+function handleOperator(op) {
+    if (firstNumber === null) {
+      firstNumber = display.textContent;
+      operator = op;
+      resetDisplay = true;
+    } else if (resetDisplay) {
+      operator = op;
+    } else {
+      calculate();
+      operator = op;
+    }
+  }
+  
