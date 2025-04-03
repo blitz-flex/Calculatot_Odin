@@ -104,4 +104,24 @@ function addDecimal() {
       display.textContent += '.';
     }
   }
+
+// Backspace function
+function backspace() {
+    if (resetDisplay) return;
+    
+    const current = display.textContent;
+    if (current.length > 1) {
+      display.textContent = current.slice(0, -1);
+    } else {
+      display.textContent = '0';
+    }
+  }
+
+// Reset calculator
+function resetCalculator() {
+    display.textContent = '0';
+    firstNumber = null;
+    operator = null;
+    resetDisplay = false;
+  }
   
