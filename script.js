@@ -65,7 +65,7 @@ function calculate() {
           if (parseFloat(secondNumber) === 0) throw "Cannot divide by zero";
           result = parseFloat(firstNumber) / parseFloat(secondNumber); 
           break;
-        case '^': result = Math.pow(parseFloat(firstNumber), parseFloat(secondNumber)); break;
+        case 'x²': result = Math.pow(parseFloat(firstNumber), parseFloat(secondNumber)); break;
         case '%': result = parseFloat(firstNumber) * (parseFloat(secondNumber) / 100); break;
       }
       
@@ -132,8 +132,8 @@ document.addEventListener('keydown', (event) => {
     // Match key to button and click it
     if (/[0-9]/.test(key)) {
       document.querySelector(`.digit:nth-child(${key === '0' ? 17 : parseInt(key) + 12 - (parseInt(key) > 3 ? 3 : 0) - (parseInt(key) > 6 ? 3 : 0)})`).click();
-    } else if (key === '+' || key === '-' || key === '*' || key === '/' || key === '%' || key === '^') {
-      const opMap = {'+': 'add', '-': 'subtract', '*': 'multiply', '/': 'divide', '%': 'percent', '^': 'power'};
+    } else if (key === '+' || key === '-' || key === '*' || key === '/' || key === '%' || key === 'x²') {
+      const opMap = {'+': 'add', '-': 'subtract', '*': 'multiply', '/': 'divide', '%': 'percent', 'x²': 'power'};
       document.getElementById(opMap[key]).click();
     } else if (key === '.' || key === ',') {
       document.getElementById('decimal').click();
