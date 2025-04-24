@@ -176,3 +176,6 @@ The implementation cleverly maps each key to the corresponding button element an
   - Keyboard support implementation
   - Error handling and display formatting
 
+  ## Test App
+[Simple Calculator Demo ](https://blitz-flex.github.io/calculatot_odin/)
+
