@@ -70,6 +70,26 @@ body {
   
   .operator {
     background-color: #ff8c00;
+    font-size: 22px;  /* Increased size for better visibility */
+    font-weight: 400;  /* Slightly reduced weight for better proportions */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Specific adjustments for different operators */
+  #multiply, #divide {
+    font-size: 24px;  /* Slightly larger for × and ÷ */
+    line-height: 1;   /* Better vertical alignment */
+  }
+  
+  #add, #subtract {
+    font-size: 26px;  /* Larger size for + and - */
+    line-height: 1;   /* Better vertical alignment */
+  }
+  
+  #percent {
+    font-size: 20px;  /* Slightly smaller for % */
   }
   
   .operator:hover {
@@ -99,4 +119,21 @@ body {
   #decimal:hover, #backspace:hover {
     background-color: #8e9eab;
   }
-  
+
+  #backspace {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .backspace-icon {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background-image: url('https://cdn4.iconfinder.com/data/icons/smartphone-menu-2/24/backspace-512.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(1); /* Makes the icon white to match other buttons */
+  }
