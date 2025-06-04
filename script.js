@@ -71,17 +71,31 @@ function calculate() {
     let result;
   
     try {
-      switch (operator) {
-        case '+': result = parseFloat(firstNumber) + parseFloat(secondNumber); break;
-        case '-': result = parseFloat(firstNumber) - parseFloat(secondNumber); break;
-        case '×': result = parseFloat(firstNumber) * parseFloat(secondNumber); break;
-        case '÷': 
-          if (parseFloat(secondNumber) === 0) throw "Cannot divide by zero";
-          result = parseFloat(firstNumber) / parseFloat(secondNumber); 
-          break;
-        case 'x²': result = Math.pow(parseFloat(firstNumber), parseFloat(secondNumber)); break;
-        case '%': result = parseFloat(firstNumber) * (parseFloat(secondNumber) / 100); break;
-      }
+        const num1 = parseFloat(firstNumber);
+        const num2 = parseFloat(secondNumber);
+
+        switch (operator) {
+          case '+': 
+            result = num1 + num2; 
+            break;
+          case '-': 
+            result = num1 - num2; 
+            break;
+          case '×': 
+            result = num1 * num2; 
+            break;
+          case '÷': 
+            if (num2 === 0) {
+              throw new Error("Cannot divide by zero");
+            }
+            result = num1 / num2; 
+            break;
+          case '%': 
+            result = num1 * (num2 / 100); 
+            break;
+          default:
+            throw new Error("Invalid operator");
+        }
       
       // Format result for display
       result = formatResult(result);
@@ -96,16 +110,21 @@ function calculate() {
     }
   }
   
-// Format result to fit display
-function formatResult(num) {
-    if (num === undefined) return "Error";
+// Handle very large or very small numbers
+      if (Math.abs(num) > 1e10 || (Math.abs(num) < 1e-6 && num !== 0)) {
+        return num.toExponential(5);
+      }
 
-    // Convert to string and check length
-    const numStr = num.toString();
-    if (numStr.length <= 10) return numStr;
-    
+      // Round to avoid floating point precision errors
+      const rounded = Math.round(num * 1e10) / 1e10;
+      const numStr = rounded.toString();
+
+    if (numStr.length <= 10) {
+      return numStr;
+    }
+
     return num.toExponential(5);
-  }
+  
 // Add decimal point
 function addDecimal() {
     if (resetDisplay) {
@@ -121,8 +140,10 @@ function addDecimal() {
 
 // Backspace function
 function backspace() {
-    if (resetDisplay) return;
-    
+    if (resetDisplay) {
+      return;
+    }
+
     const current = display.textContent;
     if (current.length > 1) {
       display.textContent = current.slice(0, -1);
