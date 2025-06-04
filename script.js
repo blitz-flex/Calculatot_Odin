@@ -36,17 +36,31 @@ function handleDigit(digit) {
 }
 
 // Function to handle operator clicks
-function handleOperator(op) {
-    if (firstNumber === null) {
-      firstNumber = display.textContent;
+function handleOperator(buttonId, op) {
+  // operation (x²)
+  if (buttonId === 'power') {
+    const current = parseFloat(display.textContent);
+    const result = Math.pow(current, 2);
+    display.textContent = formatResult(result);
+    firstNumber = null;
+    operator = null;
+    resetDisplay = true;
+    return;
+  }
+
+  if (firstNumber === null) {
+    firstNumber = display.textContent;
+    operator = op;
+    resetDisplay = true;
+  } else if (resetDisplay) {
+    operator = op;
+  } else {
+    calculate();
+    if (display.textContent !== "Error") {
       operator = op;
       resetDisplay = true;
-    } else if (resetDisplay) {
-      operator = op;
-    } else {
-      calculate();
-      operator = op;
     }
+  }
   }
   
 // Function to perform calculation
