@@ -162,22 +162,28 @@ function resetCalculator() {
 
 // Add keyboard support
 document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    
-    // Match key to button and click it
-    if (/[0-9]/.test(key)) {
-      document.querySelector(`.digit:nth-child(${key === '0' ? 17 : parseInt(key) + 12 - (parseInt(key) > 3 ? 3 : 0) - (parseInt(key) > 6 ? 3 : 0)})`).click();
-    } else if (key === '+' || key === '-' || key === '*' || key === '/' || key === '%' || key === 'x²') {
-      const opMap = {'+': 'add', '-': 'subtract', '*': 'multiply', '/': 'divide', '%': 'percent', 'x²': 'power'};
-      document.getElementById(opMap[key]).click();
-    } else if (key === '.' || key === ',') {
-      document.getElementById('decimal').click();
-    } else if (key === '=' || key === 'Enter') {
-      document.getElementById('equals').click();
-    } else if (key === 'Escape') {
-      document.getElementById('clear').click();
-    } else if (key === 'Backspace') {
-      document.getElementById('backspace').click();
-    }
-  });
-  
+    event.preventDefault(); // Prevent default browser behavior
+      const key = event.key;
+      
+      if (/[0-9]/.test(key)) {
+        handleDigit(key);
+      } else if (key === '+') {
+        handleOperator('add', '+');
+      } else if (key === '-') {
+        handleOperator('subtract', '-');
+      } else if (key === '*') {
+        handleOperator('multiply', '×');
+      } else if (key === '/') {
+        handleOperator('divide', '÷');
+      } else if (key === '%') {
+        handleOperator('percent', '%');
+      } else if (key === '.' || key === ',') {
+        addDecimal();
+      } else if (key === '=' || key === 'Enter') {
+        calculate();
+      } else if (key === 'Escape' || key === 'c' || key === 'C') {
+        resetCalculator();
+      } else if (key === 'Backspace') {
+        backspace();
+      }
+    });
