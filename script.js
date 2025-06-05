@@ -19,7 +19,7 @@ let firstNumber = null;
           resetCalculator();
         } else if (value === '.') {
           addDecimal();
-        } else if (value === '⌫') {
+        } else if (button.classList.contains('backspace') || value === '⌫') {
           backspace();
         }
       });
